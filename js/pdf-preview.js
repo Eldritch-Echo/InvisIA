@@ -1,9 +1,10 @@
 /* ================= EldritchEcho ================= */
 "use strict";
 
-import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@6.4.299/build/pdf.mjs";
+import * as pdfjsLib from "../lib/pdf.mjs";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@6.4.299/build/pdf.worker.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "lib/pdf.worker.mjs";
 
 const isInspector = document.getElementById("inspect-pdf-file") !== null;
 
