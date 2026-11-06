@@ -74,11 +74,13 @@ This illustrates how hidden document content **can influence an AI-assisted asse
 
 - **HTML5** for the application structure.
 - **CSS3** for the responsive interface and tool-specific themes.
-- **Vanilla JavaScript** for the application logic.
+- **Vanilla JavaScript (ES Modules)** for the application logic.
 - **[PDF-lib](https://pdf-lib.js.org/)** for editing PDFs and embedding invisible text.
-- **[PDF.js](https://mozilla.github.io/pdf.js/)** for PDF previewing and inspection.
+- **[PDF.js](https://mozilla.github.io/pdf.js/)** for rendering PDFs and inspecting their internal text-rendering operations.
 
-No application backend is required for normal use. The current project loads its PDF libraries from external CDNs.
+No application backend is required for normal use. PDF processing libraries are bundled locally with the application.
+
+No application backend is required for normal use. PDF processing libraries are bundled locally with the application.
 
 ## Project structure
 
@@ -96,6 +98,12 @@ InvisIA/
 │   ├── inspector.js
 │   ├── pdf-engine.js
 │   └── pdf-preview.js
+├── lib/
+│   ├── pdf-lib.min.js
+│   ├── pdf.mjs
+│   ├── pdf.worker.mjs
+│   ├── LICENSE.md
+│   └── LICENSE
 ├── README.md
 └── LICENSE
 ```
