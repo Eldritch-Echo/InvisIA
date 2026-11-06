@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <meta
+            name="description"
+            content="Inspect PDF documents for invisible text and potential prompt injection instructions." />
+
+        <meta name="theme-color" content="#0B1017" />
+
+        <title>PDF Inspector | InvisIA</title>
+
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/inspector.css" />
+    </head>
+
+    <body class="inspector-theme">
+        <!-- ================= Made by EldritchEcho ================= -->
+
+        <header class="site-header">
+            <div class="container header-content">
+                <a href="index.html" class="brand" aria-label="InvisIA home">
+                    <span class="brand-icon" aria-hidden="true"> IV </span>
+
+                    <span class="brand-name"> InvisIA </span>
+                </a>
+
+                <nav class="main-nav" aria-label="Main navigation">
+                    <a href="index.html" class="nav-link"> Home </a>
+
+                    <a href="generator.html" class="nav-link"> Generator </a>
+
+                    <a href="inspector.html" class="nav-link active" aria-current="page"> Inspector </a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ================= Made by EldritchEcho ================= -->
+
+        <main class="inspector-page">
+            <section class="inspector-intro">
+                <div class="container">
+                    <span class="eyebrow"> PDF INSPECTOR </span>
+
+                    <h1>
+                        Reveal what
+                        <span class="accent-text"> the eye can't see. </span>
+                    </h1>
+                </div>
+            </section>
+
+            <section class="inspector-workspace">
+                <div class="container">
+                    <div class="inspector-layout">
+                        <section class="inspector-panel" aria-labelledby="inspect-source-heading">
+                            <div class="panel-heading">
+                                <span class="panel-number"> 01 </span>
+
+                                <div>
+                                    <span class="panel-label"> SOURCE DOCUMENT </span>
+
+                                    <h2 id="inspect-source-heading">Select PDF</h2>
+                                </div>
+                            </div>
+
+                            <p class="panel-description">
+                                Choose a PDF document to inspect its internal text and rendering information.
+                            </p>
+
+                            <div class="file-upload-area">
+                                <input
+                                    type="file"
+                                    id="inspect-pdf-file"
+                                    accept=".pdf,application/pdf"
+                                    class="file-input"
+                                    aria-describedby="inspect-file-help" />
+
+                                <label for="inspect-pdf-file" class="file-upload-label">
+                                    <span class="upload-icon" aria-hidden="true"> PDF </span>
+
+                                    <strong> Select a PDF to inspect </strong>
+
+                                    <span> Click to browse your files </span>
+                                </label>
+                            </div>
+
+                            <p id="inspect-file-help" class="field-hint">
+                                PDF files only. Analysis runs in your browser.
+                            </p>
+                            <div id="inspect-selected-file" class="selected-file" aria-live="polite" hidden>
+                                <span class="selected-file-label"> SELECTED FILE </span>
+
+                                <span id="inspect-file-name" class="selected-file-name"> </span>
+
+                                <span id="inspect-file-size" class="selected-file-size"> </span>
+                                <button
+                                    type="button"
+                                    id="clear-inspector-button"
+                                    class="clear-file-button"
+                                    aria-label="Clear file and reset inspector">
+                                    Clear
+                                </button>
+                            </div>
+
+                            <button
+                                type="button"
+                                id="inspect-button"
+                                class="button button-primary inspect-button"
+                                disabled>
+                                Inspect PDF
+                            </button>
+
+                            <div
+                                id="inspection-status"
+                                class="inspection-status"
+                                role="status"
+                                aria-live="polite"></div>
+                        </section>
+
+                        <aside class="inspector-preview" aria-labelledby="inspect-preview-heading">
+                            <div class="preview-header">
+                                <div>
+                                    <span class="panel-label"> DOCUMENT VIEW </span>
+
+                                    <h2 id="inspect-preview-heading">PDF Preview</h2>
+                                </div>
+
+                                <span id="inspect-page-count" class="preview-page-count"> No document </span>
+                            </div>
+
+                            <div id="inspect-preview-container" class="preview-container">
+                                <div id="inspect-preview-empty" class="preview-empty">
+                                    <div class="preview-empty-icon" aria-hidden="true">PDF</div>
+
+                                    <h3>No document selected</h3>
+
+                                    <p>Select a PDF to display its visible content here.</p>
+                                </div>
+
+                                <div id="inspect-preview-pages" class="preview-pages" hidden></div>
+                            </div>
+
+                            <div class="preview-footer">
+                                <p>
+                                    The preview represents the rendered document. Hidden text may remain in the PDF
+                                    data.
+                                </p>
+                            </div>
+                        </aside>
+                    </div>
+
+                    <!-- ================= Made by EldritchEcho ================= -->
+
+                    <section id="inspection-results" class="inspection-results" aria-labelledby="results-heading">
+                        <div class="results-heading">
+                            <span class="panel-label"> DOCUMENT ANALYSIS </span>
+
+                            <h2 id="results-heading">Inspection Results</h2>
+
+                            <p>Review the document statistics and any hidden content detected during inspection.</p>
+                        </div>
+
+                        <div class="results-panel">
+                            <div class="panel-heading">
+                                <span class="panel-number"> 02 </span>
+
+                                <div>
+                                    <span class="panel-label"> ANALYSIS SUMMARY </span>
+
+                                    <h3>Document Statistics</h3>
+                                </div>
+                            </div>
+
+                            <div class="statistics-grid">
+                                <div class="stat-card">
+                                    <span id="stat-pages" class="stat-value"> 0 </span>
+
+                                    <span class="stat-label"> Pages </span>
+                                </div>
+
+                                <div class="stat-card">
+                                    <span id="stat-text-items" class="stat-value"> 0 </span>
+
+                                    <span class="stat-label"> Text Items </span>
+                                </div>
+
+                                <div class="stat-card">
+                                    <span id="stat-hidden-items" class="stat-value"> 0 </span>
+
+                                    <span class="stat-label"> Hidden Items </span>
+                                </div>
+                            </div>
+
+                            <div id="analysis-summary" class="analysis-summary" aria-live="polite">
+                                <p>Select and inspect a PDF to view the analysis results.</p>
+                            </div>
+                        </div>
+
+                        <div class="results-panel hidden-content-panel" aria-labelledby="hidden-content-heading">
+                            <div class="panel-heading">
+                                <span class="panel-number"> 03 </span>
+
+                                <div>
+                                    <span class="panel-label"> DETECTED CONTENT </span>
+
+                                    <h3 id="hidden-content-heading">Hidden Instructions</h3>
+                                </div>
+                            </div>
+
+                            <p class="panel-description">
+                                Text identified as potentially hidden from the document's normal visual representation
+                                will appear below.
+                            </p>
+
+                            <div id="hidden-results-empty" class="hidden-results-empty">
+                                <span class="empty-results-icon" aria-hidden="true"> ? </span>
+
+                                <p>No document analyzed yet.</p>
+                            </div>
+
+                            <div id="hidden-results-list" class="hidden-results-list" hidden></div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- ================= Made by EldritchEcho ================= -->
+
+            <section class="notice-section">
+                <div class="container">
+                    <div class="notice-content">
+                        <span class="notice-label"> INSPECTION LIMITATIONS </span>
+
+                        <p>
+                            InvisIA analyzes detectable PDF content and rendering properties. A clean result does not
+                            guarantee that a document is free from all forms of prompt injection.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ================= Made by EldritchEcho ================= -->
+
+        <footer class="site-footer">
+            <div class="container footer-content">
+                <span class="footer-brand"> InvisIA </span>
+
+                <p>PDF Hidden Content Security Toolkit</p>
+
+                <span class="footer-note"> Built for security research and education. Made by EldritchEcho. </span>
+            </div>
+        </footer>
+
+        <!-- ================= Made by EldritchEcho ================= -->
+
+        <script src="js/app.js" defer></script>
+        <script type="module" src="js/inspector.js"></script>
+        <script type="module" src="js/pdf-preview.js"></script>
+    </body>
+</html>
